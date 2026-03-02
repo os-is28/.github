@@ -1,0 +1,24 @@
+name: Create Member Workspace
+
+on:
+  membership:
+    types:
+      - added
+
+jobs:
+  create-workspace:
+    runs-on: ubuntu-latest
+    permissions: {}
+    steps:
+      - name: Create repository from template
+        run: |
+          REPO_NAME="$(echo "${{ github.event.member.login }}" | tr '[:upper:]' '[:lower:]')-workspace"
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            /repos/os-is28/template/generate \
+            -f owner="os-is28" \
+            -f name="${REPO_NAME}" \
+            -f private=false
+        env:
+          GH_TOKEN: ${{ secrets.ORG_TOKEN }}
