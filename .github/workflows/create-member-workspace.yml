@@ -1,9 +1,9 @@
 name: Create Member Workspace
 
 on:
-  membership:
+  organization:
     types:
-      - added
+      - member_added
 
 jobs:
   create-workspace:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Create repository from template
         run: |
-          REPO_NAME="$(echo "${{ github.event.member.login }}" | tr '[:upper:]' '[:lower:]')-workspace"
+          REPO_NAME="$(echo "${{ github.event.membership.user.login }}" | tr '[:upper:]' '[:lower:]')-workspace"
           gh api \
             --method POST \
             -H "Accept: application/vnd.github+json" \
