@@ -19,6 +19,6 @@ jobs:
             /repos/os-is28/template/generate \
             -f owner="os-is28" \
             -f name="${REPO_NAME}" \
-            -f private=false
+            -f private=true
         env:
           GH_TOKEN: ${{ secrets.ORG_TOKEN }}
