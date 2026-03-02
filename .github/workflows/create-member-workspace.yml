@@ -2,8 +2,7 @@ name: Create Member Workspace
 
 on:
   organization:
-    types:
-      - member_added
+    types: [member_added]
 
 jobs:
   create-workspace:
